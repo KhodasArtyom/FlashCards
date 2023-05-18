@@ -1,0 +1,78 @@
+-- Добавление в таблицы
+INSERT INTO titles(id, set_name)
+VALUES (DEFAULT, 'English.COLORS'),
+       (DEFAULT, 'English.NUMBERS');
+
+INSERT INTO flashcards(id_card, question, answer, status_knowledge)
+VALUES (1, 'Белый', 'White', false),
+       (1, 'Чёрный', 'Black', false),
+       (1, 'Оранжевый', 'Orange', false),
+       (1, 'Розовый', 'Ping', false),
+       (2, '2+2*2', '6', false),
+       (2, '3 * 13', '39', false),
+       (2, '100 / 25', '4', false);
+
+--Удаление строки из таблицы titles
+DELETE
+FROM titles
+WHERE id = 2;
+
+--Удаление строки из таблицы flashcards
+DELETE
+FROM flashcards
+WHERE id = 2;
+
+-- Список набора карточек titles
+SELECT id       AS id,
+       set_name AS name
+FROM titles;
+
+-- Список набора карточек flashcards
+SELECT id               AS id,
+       question         AS question,
+       answer           AS answer,
+       status_knowledge AS status_knowledge
+FROM flashcards;
+
+--Редактирование списка карточки title
+SELECT id       AS id,
+       set_name as name
+FROM titles
+WHERE id = 1;
+
+--Редактироване списка карточки flashcards
+SELECT id               AS id,
+       question         AS question,
+       answer           AS answer,
+       status_knowledge AS status_knowledge
+FROM flashcards
+WHERE id_card = 2;
+
+--Выбор карточки и выполнение тренировки
+SELECT id               AS id,
+       question         AS question,
+       answer           AS answer,
+       status_knowledge AS status_knowledge
+FROM flashcards
+WHERE flashcards.id_card = 1
+  AND NOT flashcards.status_knowledge
+ORDER BY flashcards.id
+LIMIT 1;
+
+--изменение колонки status_knowledge при успешном выполнении
+UPDATE flashcards
+SET status_knowledge = true
+WHERE id = 1;
+
+--Расчет количество зученных карточек из всего списка карточек
+
+SELECT titles.id                                                         AS id,
+       titles.set_name                                                   AS name,
+       count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
+       count(flashcards.id)                                              AS global
+FROM titles
+         LEFT JOIN flashcards ON titles.id = flashcards.id_card
+GROUP BY titles.id;
+
+
+
