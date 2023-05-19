@@ -1,5 +1,5 @@
 -- Добавление в таблицы
-INSERT INTO titles(id, set_name)
+INSERT INTO flashcards_themes(id, set_name)
 VALUES (DEFAULT, 'English.COLORS'),
        (DEFAULT, 'English.NUMBERS');
 
@@ -14,7 +14,7 @@ VALUES (1, 'Белый', 'White', false),
 
 --Удаление строки из таблицы titles
 DELETE
-FROM titles
+FROM flashCards_themes
 WHERE id = 2;
 
 --Удаление строки из таблицы flashcards
@@ -25,7 +25,7 @@ WHERE id = 2;
 -- Список набора карточек titles
 SELECT id       AS id,
        set_name AS name
-FROM titles;
+FROM flashCards_themes;
 
 -- Список набора карточек flashcards
 SELECT id               AS id,
@@ -37,7 +37,7 @@ FROM flashcards;
 --Редактирование списка карточки title
 SELECT id       AS id,
        set_name as name
-FROM titles
+FROM flashCards_themes
 WHERE id = 1;
 
 --Редактироване списка карточки flashcards
@@ -66,13 +66,13 @@ WHERE id = 1;
 
 --Расчет количество зученных карточек из всего списка карточек
 
-SELECT titles.id                                                         AS id,
-       titles.set_name                                                   AS name,
+SELECT flashCards_themes.id                                                         AS id,
+       flashCards_themes.set_name                                                   AS name,
        count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
        count(flashcards.id)                                              AS global
-FROM titles
-         LEFT JOIN flashcards ON titles.id = flashcards.id_card
-GROUP BY titles.id;
+FROM flashCards_themes
+         LEFT JOIN flashcards ON flashCards_themes.id = flashcards.id_card
+GROUP BY flashCards_themes.id;
 
 
 
