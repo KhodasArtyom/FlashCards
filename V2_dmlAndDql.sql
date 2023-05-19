@@ -48,6 +48,17 @@ SELECT id               AS id,
 FROM flashcards
 WHERE flashCards_themes_id = 2;
 
+--Расчет количество изученных карточек из всего списка карточек
+
+SELECT flashCards_themes.id                                              AS id,
+       flashCards_themes.set_name                                        AS name,
+       count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
+       count(flashcards.id)                                              AS global
+FROM flashCards_themes
+         LEFT JOIN flashcards ON flashCards_themes.id = flashcards.flashCards_themes_id
+GROUP BY flashCards_themes.id;
+
+
 --Выбор карточки и выполнение тренировки
 SELECT id               AS id,
        question         AS question,
@@ -75,15 +86,7 @@ UPDATE flashcards
 SET status_knowledge = true
 WHERE id = 1;
 
---Расчет количество зученных карточек из всего списка карточек
 
-SELECT flashCards_themes.id                                              AS id,
-       flashCards_themes.set_name                                        AS name,
-       count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
-       count(flashcards.id)                                              AS global
-FROM flashCards_themes
-         LEFT JOIN flashcards ON flashCards_themes.id = flashcards.flashCards_themes_id
-GROUP BY flashCards_themes.id;
 
 
 
