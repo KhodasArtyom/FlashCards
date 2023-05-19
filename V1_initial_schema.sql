@@ -6,9 +6,9 @@ CREATE TABLE flashCards_themes
 
 CREATE TABLE flashCards
 (
-    id               BIGSERIAL PRIMARY KEY,
-    id_card          BIGINT  NOT NULL REFERENCES flashCards_themes ON DELETE CASCADE,
-    question         TEXT    NOT NULL,
-    answer           TEXT    NOT NULL,
-    status_knowledge BOOLEAN NOT NULL
+    id                   BIGSERIAL PRIMARY KEY,
+    flashCards_themes_id BIGINT  NOT NULL REFERENCES flashCards_themes ON DELETE CASCADE,
+    question             TEXT    NOT NULL,
+    answer               TEXT    NOT NULL,
+    status_knowledge     BOOLEAN NOT NULL
 );

@@ -46,7 +46,7 @@ SELECT id               AS id,
        answer           AS answer,
        status_knowledge AS status_knowledge
 FROM flashcards
-WHERE id_card = 2;
+WHERE flashCards_themes_id = 2;
 
 --Выбор карточки и выполнение тренировки
 SELECT id               AS id,
@@ -54,7 +54,7 @@ SELECT id               AS id,
        answer           AS answer,
        status_knowledge AS status_knowledge
 FROM flashcards
-WHERE flashcards.id_card = 1
+WHERE flashcards.flashCards_themes_id = 1
   AND NOT flashcards.status_knowledge
 ORDER BY flashcards.id
 LIMIT 1;
@@ -71,7 +71,7 @@ SELECT flashCards_themes.id                                                     
        count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
        count(flashcards.id)                                              AS global
 FROM flashCards_themes
-         LEFT JOIN flashcards ON flashCards_themes.id = flashcards.id_card
+         LEFT JOIN flashcards ON flashCards_themes.id = flashcards.flashCards_themes_id
 GROUP BY flashCards_themes.id;
 
 
