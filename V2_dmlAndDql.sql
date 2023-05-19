@@ -3,7 +3,7 @@ INSERT INTO flashcards_themes(id, set_name)
 VALUES (DEFAULT, 'English.COLORS'),
        (DEFAULT, 'English.NUMBERS');
 
-INSERT INTO flashcards(id_card, question, answer, status_knowledge)
+INSERT INTO flashcards(flashCards_themes_id, question, answer, status_knowledge)
 VALUES (1, 'Белый', 'White', false),
        (1, 'Чёрный', 'Black', false),
        (1, 'Оранжевый', 'Orange', false),
@@ -59,6 +59,17 @@ WHERE flashcards.flashCards_themes_id = 1
 ORDER BY flashcards.id
 LIMIT 1;
 
+SELECT id               AS id,
+       question         AS question,
+       answer           AS answer,
+       status_knowledge AS status_knowledge
+FROM flashcards
+WHERE flashcards_themes_id = 1
+  AND NOT flashcards.status_knowledge
+ORDER BY flashcards.id
+LIMIT 1 OFFSET 1;
+
+
 --изменение колонки status_knowledge при успешном выполнении
 UPDATE flashcards
 SET status_knowledge = true
@@ -66,8 +77,8 @@ WHERE id = 1;
 
 --Расчет количество зученных карточек из всего списка карточек
 
-SELECT flashCards_themes.id                                                         AS id,
-       flashCards_themes.set_name                                                   AS name,
+SELECT flashCards_themes.id                                              AS id,
+       flashCards_themes.set_name                                        AS name,
        count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
        count(flashcards.id)                                              AS global
 FROM flashCards_themes
