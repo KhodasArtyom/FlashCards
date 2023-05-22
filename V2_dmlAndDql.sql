@@ -1,26 +1,18 @@
 -- Добавление в таблицы
-INSERT INTO flashcards_themes(id, set_name)
-VALUES (DEFAULT, 'English.COLORS'),
-       (DEFAULT, 'English.NUMBERS');
-
 INSERT INTO flashcards(flashCards_themes_id, question, answer, status_knowledge)
-VALUES (1, 'Белый', 'White', false),
-       (1, 'Чёрный', 'Black', false),
-       (1, 'Оранжевый', 'Orange', false),
-       (1, 'Розовый', 'Ping', false),
-       (2, '2+2*2', '6', false),
-       (2, '3 * 13', '39', false),
-       (2, '100 / 25', '4', false);
+VALUES (?,?,?,?);
+INSERT INTO flashcards_themes(id, set_name)
+VALUES (?);
 
 --Удаление строки из таблицы flashcards-themes
 DELETE
 FROM flashCards_themes
-WHERE id = 2;
+WHERE id = ?;
 
 --Удаление строки из таблицы flashcards
 DELETE
 FROM flashcards
-WHERE id = 2;
+WHERE id = ?;
 
 -- Список набора карточек flashcards_themes
 SELECT id       AS id,
@@ -38,7 +30,7 @@ FROM flashcards;
 SELECT id       AS id,
        set_name as name
 FROM flashCards_themes
-WHERE id = 1;
+WHERE id = ?;
 
 --Редактироване списка карточки flashcards
 SELECT id               AS id,
@@ -46,7 +38,7 @@ SELECT id               AS id,
        answer           AS answer,
        status_knowledge AS status_knowledge
 FROM flashcards
-WHERE flashCards_themes_id = 2;
+WHERE flashCards_themes_id = ?;
 
 --Список карточек
 
@@ -56,9 +48,9 @@ SELECT id               AS id,
        answer           AS answer,
        status_knowledge AS status_knowledge
 FROM flashcards
-WHERE flashcards_themes_id = 1
+WHERE flashcards_themes_id = ?
   AND NOT flashcards.status_knowledge
-  AND flashcards.id > 1
+  AND flashcards.id > ?
 ORDER BY flashcards.id
 LIMIT 1;
 
