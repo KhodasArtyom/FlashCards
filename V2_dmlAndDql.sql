@@ -1,6 +1,7 @@
 -- Добавление в таблицы
 INSERT INTO flashcards(flashCards_themes_id, question, answer, status_knowledge)
 VALUES (?,?,?,?);
+
 INSERT INTO flashcards_themes(id, set_name)
 VALUES (?);
 
