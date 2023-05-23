@@ -10,7 +10,7 @@ void save(long flashCards_themes_id,String question,String answer,boolean isLear
 
 void remove (long flashCardId);
 
-boolean statusUpdateLearned(long flashCardId,boolean isLearned);
+void statusUpdateLearned(long flashCardId,boolean isLearned);
 
 
 List<FlashCards> findAllFlashCards(long flashCards_themes_id, long nextAfterId);

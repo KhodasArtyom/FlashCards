@@ -27,9 +27,9 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setLong(1, flashCards_themes_id);
-            statement.setString(2,question);
-            statement.setString(3,answer);
-            statement.setBoolean(4,isLearned);
+            statement.setString(2, question);
+            statement.setString(3, answer);
+            statement.setBoolean(4, isLearned);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -46,8 +46,8 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
                 WHERE id = ?
                 """;
         try (Connection connection = db.getConnection();
-        PreparedStatement statement= connection.prepareStatement(sql)){
-            statement.setLong(1,flashCardId);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, flashCardId);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -62,6 +62,13 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
                 SET status_knowledge = true
                 WHERE id = ?
                 """;
+        try (Connection connection = db.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1,flashCardId);
+            statement.setBoolean(2,isLearned);
+        } catch (SQLException e) {
+            throw new RepositoryException(e);
+        }
     }
 
     @Override
