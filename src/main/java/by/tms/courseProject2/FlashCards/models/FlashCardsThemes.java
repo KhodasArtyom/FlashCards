@@ -31,4 +31,15 @@ public class FlashCardsThemes {
     public long getTotalNumberOfCards() {
         return totalNumberOfCards;
     }
+
+
+    @Override
+    public String toString() {
+        return "FlashCardsThemes{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", numberOfLearnedCards=" + numberOfLearnedCards +
+                ", totalNumberOfCards=" + totalNumberOfCards +
+                '}';
+    }
 }

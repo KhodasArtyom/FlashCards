@@ -68,14 +68,14 @@ public class FlashCardsThemesJDBCRepository implements FlashCardsThemesRepositor
             while (resultSet.next()) {
                 FlashCardsThemes flashCardsThemes = new FlashCardsThemes(
                         resultSet.getLong("id"),
-                        resultSet.getString("title"),
-                        resultSet.getLong("learnedFlashCards"),
-                        resultSet.getLong("totalCountCards"));
+                        resultSet.getString("name"),
+                        resultSet.getLong("succsess"),
+                        resultSet.getLong("global"));
                 listResult.add(flashCardsThemes);
             }
             return listResult;
         } catch (SQLException e) {
-            throw new RepositoryException(e);
+                throw new RepositoryException(e);
         }
 
     }
