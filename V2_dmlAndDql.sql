@@ -69,7 +69,7 @@ GROUP BY flashCards_themes.id;
 --изменение колонки status_knowledge при успешном выполнении
 UPDATE flashcards
 SET status_knowledge = true
-WHERE id = 1;
+WHERE id = ?;
 
 
 

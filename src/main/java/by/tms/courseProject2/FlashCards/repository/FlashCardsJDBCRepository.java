@@ -30,22 +30,38 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
             statement.setString(2,question);
             statement.setString(3,answer);
             statement.setBoolean(4,isLearned);
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
 
-
     }
 
     @Override
-    public boolean remove(long flashCardId) {
-        return false;
+    public void remove(long flashCardId) {
+        String sql = """
+                DELETE
+                FROM flashcards
+                WHERE id = ?
+                """;
+        try (Connection connection = db.getConnection();
+        PreparedStatement statement= connection.prepareStatement(sql)){
+            statement.setLong(1,flashCardId);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RepositoryException(e);
+        }
     }
 
     @Override
-    public boolean statusUpdateLearned(long flashCardId, boolean isLearned) {
-        return false;
+    public void statusUpdateLearned(long flashCardId, boolean isLearned) {
+        String sql = """
+                UPDATE flashcards
+                SET status_knowledge = true
+                WHERE id = ?
+                """;
     }
 
     @Override

@@ -25,6 +25,8 @@ public class Application {
         flashCardsThemesRepository.save("Bikes");
         List<FlashCardsThemes> list  = flashCardsThemesRepository.getAllThemes();
         System.out.println(list);
+        flashCardsRepository.save(1,"engine","Двигатель",false);
+        flashCardsRepository.remove(1);
 
 
 
