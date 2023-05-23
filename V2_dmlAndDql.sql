@@ -2,7 +2,7 @@
 INSERT INTO flashcards(flashCards_themes_id, question, answer, status_knowledge)
 VALUES (?,?,?,?);
 
-INSERT INTO flashcards_themes(id, set_name)
+INSERT INTO flashcards_themes( set_name)
 VALUES (?);
 
 --Удаление строки из таблицы flashcards-themes
