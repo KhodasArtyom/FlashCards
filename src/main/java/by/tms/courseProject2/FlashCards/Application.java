@@ -15,6 +15,7 @@ public class Application {
         dataSource.setPassword("1279");
         FlashCardsThemesRepository flashCardsThemesRepository = new FlashCardsThemesJDBCRepository(dataSource);
 
+
         flashCardsThemesRepository.remove(2);
         flashCardsThemesRepository.save("Cars");
         flashCardsThemesRepository.save("Bikes");

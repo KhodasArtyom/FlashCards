@@ -54,7 +54,7 @@ public class FlashCardsThemesJDBCRepository implements FlashCardsThemesRepositor
     public List<FlashCardsThemes> getAllThemes() {
         String sql = """
                 SELECT flashCards_themes.id                                              AS id,
-                       flashCards_themes.set_name                                        AS name,
+                       flashCards_themes.set_name                                          AS name,
                        count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
                        count(flashcards.id)                                              AS global
                 FROM flashCards_themes
@@ -66,7 +66,8 @@ public class FlashCardsThemesJDBCRepository implements FlashCardsThemesRepositor
             ResultSet resultSet = statement.executeQuery(sql);
             List<FlashCardsThemes> listResult = new ArrayList<>();
             while (resultSet.next()) {
-                FlashCardsThemes flashCardsThemes = new FlashCardsThemes(resultSet.getLong("id"),
+                FlashCardsThemes flashCardsThemes = new FlashCardsThemes(
+                        resultSet.getLong("id"),
                         resultSet.getString("title"),
                         resultSet.getLong("learnedFlashCards"),
                         resultSet.getLong("totalCountCards"));
