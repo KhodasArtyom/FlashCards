@@ -37,7 +37,7 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
     @Override
     public void save(long flashCards_themes_id, String question, String answer, boolean isLearned) {
         String sql = """
-                INSERT INTO flashcards(flashCards_themes_id, question, answer, status_knowledge)
+                INSERT INTO flashcard(flashCards_themes_id, question, answer, status_knowledge)
                 VALUES (?,?,?,?)             
                 """;
         try (Connection connection = db.getConnection();
@@ -59,7 +59,7 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
     public void remove(long flashCardId) {
         String sql = """
                 DELETE
-                FROM flashcards
+                FROM flashcard
                 WHERE id = ?
                 """;
         try (Connection connection = db.getConnection();
@@ -75,9 +75,9 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
     @Override
     public void statusUpdateLearned(long flashCardId, boolean isLearned) {
         String sql = """
-                UPDATE flashcards
+                UPDATE flashcard
                 SET status_knowledge = ?
-                WHERE flashcards.id=?;
+                WHERE flashcard.id=?;
                 """;
         try (Connection connection = db.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -96,11 +96,11 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
                        question         AS question,
                        answer           AS answer,
                        status_knowledge AS status_knowledge
-                FROM flashcards
+                FROM flashcard
                 WHERE flashcards_themes_id = ?
-                  AND NOT flashcards.status_knowledge
+                  AND NOT flashcard.status_knowledge
       
-                ORDER BY flashcards.id
+                ORDER BY flashcard.id
                 LIMIT 1 OFFSET ?
                 """;
         try (Connection connection = db.getConnection();
@@ -130,7 +130,7 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
                        question         AS question,
                        answer           AS answer,
                        status_knowledge AS status_knowledge
-                FROM flashcards
+                FROM flashcard
                 WHERE flashCards_themes_id = ?;
                 """;
 

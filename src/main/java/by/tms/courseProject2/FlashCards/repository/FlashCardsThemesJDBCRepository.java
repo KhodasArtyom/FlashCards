@@ -19,7 +19,7 @@ public class FlashCardsThemesJDBCRepository implements FlashCardsThemesRepositor
     @Override
     public void save(String nameOfTheme) {
         String sql = """
-                INSERT INTO flashcards_themes( set_name)
+                INSERT INTO flashcards_theme( set_name)
                 VALUES (?)
                 """;
         try (Connection connection = db.getConnection();
@@ -36,7 +36,7 @@ public class FlashCardsThemesJDBCRepository implements FlashCardsThemesRepositor
     public boolean remove(long id) {
         String sql = """
                 DELETE
-                FROM flashCards_themes
+                FROM flashCards_theme
                 WHERE id = ?
                 """;
         try (Connection connection = db.getConnection();
@@ -53,13 +53,13 @@ public class FlashCardsThemesJDBCRepository implements FlashCardsThemesRepositor
     @Override
     public List<FlashCardsThemes> getAllThemes() {
         String sql = """
-                SELECT flashCards_themes.id                                              AS id,
-                       flashCards_themes.set_name                                          AS name,
-                       count(flashcards.id) FILTER ( WHERE flashcards.status_knowledge ) AS succsess,
-                       count(flashcards.id)                                              AS global
-                FROM flashCards_themes
-                            LEFT JOIN flashcards ON flashCards_themes.id = flashcards.flashCards_themes_id
-                GROUP BY flashCards_themes.id
+                SELECT flashCards_theme.id                                              AS id,
+                       flashCards_theme.set_name                                          AS name,
+                       count(flashcard.id) FILTER ( WHERE flashcard.status_knowledge ) AS succsess,
+                       count(flashcard.id)                                              AS global
+                FROM flashCards_theme
+                            LEFT JOIN flashcard ON flashCards_theme.id = flashcard.flashCards_themes_id
+                GROUP BY flashCards_theme.id
                 """;
         try (Connection connection = db.getConnection();
              Statement statement = connection.createStatement()) {
