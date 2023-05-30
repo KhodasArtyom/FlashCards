@@ -76,13 +76,14 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
     public void statusUpdateLearned(long flashCardId, boolean isLearned) {
         String sql = """
                 UPDATE flashcards
-                SET status_knowledge = true
-                WHERE id = ?
+                SET status_knowledge = ?
+                WHERE flashcards.id=?;
                 """;
         try (Connection connection = db.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setLong(1, flashCardId);
-            statement.setBoolean(2, isLearned);
+            statement.setBoolean(1, isLearned);
+            statement.setLong(2, flashCardId);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
@@ -98,7 +99,7 @@ public class FlashCardsJDBCRepository implements FlashCardsRepository {
                 FROM flashcards
                 WHERE flashcards_themes_id = ?
                   AND NOT flashcards.status_knowledge
-                  AND flashcards.id > ?
+      
                 ORDER BY flashcards.id
                 LIMIT 1 OFFSET ?
                 """;

@@ -51,7 +51,6 @@ SELECT id               AS id,
 FROM flashcards
 WHERE flashcards_themes_id = ?
   AND NOT flashcards.status_knowledge
-  AND flashcards.id > ?
 ORDER BY flashcards.id
 LIMIT 1 OFFSET ?;
 
@@ -69,7 +68,7 @@ GROUP BY flashCards_themes.id;
 --изменение колонки status_knowledge при успешном выполнении
 UPDATE flashcards
 SET status_knowledge = true
-WHERE id = ?;
+WHERE flashcards.id = 1;
 
 
 

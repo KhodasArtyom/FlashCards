@@ -25,7 +25,7 @@ public class Application {
         flashCardsThemesRepository.save("COLORS");
         flashCardsThemesRepository.save("NUMBERS");
 
-        flashCardsThemesRepository.remove(2);
+
 
         flashCardsRepository.save(1, "Black", "Чёрный", false);
         flashCardsRepository.save(1, "White", "Белый", false);
@@ -41,9 +41,8 @@ public class Application {
         Optional<FlashCards> allFlashCardsByIdAndOffset = flashCardsRepository.findAllFlashCardsByIdAndOffset(1, 0);
         System.out.println(allFlashCardsByIdAndOffset);
 
+        flashCardsRepository.statusUpdateLearned(1,true);
         flashCardsRepository.statusUpdateLearned(2,true);
-        flashCardsRepository.statusUpdateLearned(3,true);
-
 
 
     }
