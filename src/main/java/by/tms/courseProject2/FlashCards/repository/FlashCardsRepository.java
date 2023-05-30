@@ -3,6 +3,7 @@ package by.tms.courseProject2.FlashCards.repository;
 import by.tms.courseProject2.FlashCards.models.FlashCards;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FlashCardsRepository {
 
@@ -13,5 +14,7 @@ void remove (long flashCardId);
 void statusUpdateLearned(long flashCardId,boolean isLearned);
 
 
-List<FlashCards> findAllFlashCards(long flashCards_themes_id, long nextAfterId);
+Optional<FlashCards> findAllFlashCardsByIdAndOffset(long flashCards_themes_id, long offset);
+
+List<FlashCards> findAllByThemeId(long flashcards_themesId);
 }

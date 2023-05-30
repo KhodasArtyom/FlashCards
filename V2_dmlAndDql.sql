@@ -53,7 +53,7 @@ WHERE flashcards_themes_id = ?
   AND NOT flashcards.status_knowledge
   AND flashcards.id > ?
 ORDER BY flashcards.id
-LIMIT 1;
+LIMIT 1 OFFSET ?;
 
 --Расчет количество изученных карточек из всего списка карточек
 
