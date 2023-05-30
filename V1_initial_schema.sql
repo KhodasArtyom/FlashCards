@@ -1,10 +1,10 @@
-CREATE TABLE flashCards_themes
+CREATE TABLE flashCards_theme
 (
     id       BIGSERIAL PRIMARY KEY,
     set_name TEXT NOT NULL
 );
 
-CREATE TABLE flashCards
+CREATE TABLE flashCard
 (
     id                   BIGSERIAL PRIMARY KEY,
     flashCards_themes_id BIGINT  NOT NULL REFERENCES flashCards_themes ON DELETE CASCADE,
