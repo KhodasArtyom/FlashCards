@@ -12,3 +12,5 @@ CREATE TABLE flashсard
     answer               TEXT    NOT NULL,
     status_knowledge     BOOLEAN NOT NULL
 );
+
+--comment
